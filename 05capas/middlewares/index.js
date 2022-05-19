@@ -1,0 +1,13 @@
+// APLICACIONES WEB 2
+// Nombres y Apellidos: Winter Aníbal Meza Jiménez.
+// Curso: Sexto "B" 2022(1).
+// Clase: Arquitectura de capas.
+// Fecha: Miércoles, 18 de mayo de 2022.
+// Docente: Ing. Jhon Antonio Cevallos Macías, Mg.
+// Archivo de barril.
+// Se extrae el middleware de validarDatos.
+const validarCampos = require('./validarCampos')
+    // Se exporta el módulo de validarDatos.
+module.exports = {
+    ...validarCampos
+}
