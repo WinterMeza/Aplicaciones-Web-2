@@ -1,0 +1,33 @@
+# APLICACIONES WEB 2
+# Nombres y Apellidos: Winter Aníbal Meza Jiménez.
+# Curso: Sexto "B" 2022(1).
+# Clase: Ejemplo microservicios / Proxy and dockercompose.
+# Fecha: Martes, 28 de junio de 2022.
+# Docente: Ing. Jhon Antonio Cevallos Macías, Mg.
+# Debemos indicar que versión de docker-compose vamos a utilizar para la cual trabajaremos con la versión 3.
+version: '3'
+# Indicaremos los diferentes servicios que vamos a utilizar y cada uno de ellos será convertido en un contenedor.
+services:
+  monolitico:
+  # Se construyen los micorservicios de usuario, productos y cliente.
+    build: ./monolitico
+  usuarios:
+    build: ./microservicios/usuarios
+  productos:
+     build: ./microservicios/productos
+  clientes:
+    build: ./microservicios/clientes
+  # Servidor web para puerto, los proxis sirven para redireccionar los puertos.
+  nginx:
+    image: nginx:latest 
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+  # Tenemos un contenedor que depende de otros.
+    depends_on:
+      - monolitico
+      - productos
+      - clientes
+      - usuarios 
+
