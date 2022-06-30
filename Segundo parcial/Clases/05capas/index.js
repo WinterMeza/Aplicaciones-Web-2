@@ -7,7 +7,7 @@
 //Archivo de barril.
 // Se extrae la libreria dotenv y el archivo config.js de la base de datos.
 require('dotenv').config()
-    // Bloque de código que llama al servidor.
-const Server = require('./server');
+const Server =  require('./server');
+// Bloque de código que llama al servidor.
 const server = new Server();
 server.listen();

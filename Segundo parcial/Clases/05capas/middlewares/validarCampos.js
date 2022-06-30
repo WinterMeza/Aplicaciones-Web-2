@@ -9,16 +9,15 @@ const { validationResult } = require('express-validator');
 //Definir el middleware.
 //Función para validar los campos.
 const validarCampos = (req, res, next) => {
-    const errors = validationResult(req);
-    // Condición if en caso de que no haya error.
-    if (!errors.isEmpty()) {
-        return res.status(400).json(errors)
+        const errors = validationResult(req);
+        // Condición if en caso de que no haya error.
+        if (!errors.isEmpty()) {
+            return res.status(400).json(errors)
+        }
+        next()
+
     }
-    next()
-
-}
-
-// Se exporta el módulo de validarCampos.
+    // Se exporta el módulo de validarCampos.
 module.exports = {
     validarCampos
 }

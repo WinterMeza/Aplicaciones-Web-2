@@ -11,26 +11,26 @@ const { dbConnection } = require('./database/config');
 // Se declara una clase para el servidor.
 class Server {
     constructor() {
-            // En el constructor se definen los atributos.
-            this.app = express.Router();
-            this.router = express.Router();
-            this.port = process.env.PORT;
-            this.paths = {
-                    productos: '/api/productos'
-                }
-                // Levantar servidor.
-            this.conectarDB();
-            this.middlewares();
-            this.routes();
-            // localhost:3000/v2/sextob/api/productos
-            this.router.use('/v2/sextob', this.app);
-            this._express = express().use(this.router);
-        }
-        // Es asincrónico todos los métodos de conexión a la base de datos. MongoDB
+        // En el constructor se definen los atributos.
+        this.app = express.Router();
+        this.router = express.Router();
+        this.port = process.env.PORT;
+        this.paths = {
+                productos: '/api/productos'
+            }
+            // Levantar servidor.
+        this.conectarDB();
+        this.middlewares();
+        this.routes();
+        // localhost:3000/v2/sextob/api/productos
+        this.router.use('/v2/sextob', this.app);
+        this._express = express().use(this.router);
+    }
     async conectarDB() {
-            await dbConnection()
-        }
-        // Se utlizan las funciones de las liberías de express y cors.
+        // Es asincrónico todos los métodos de conexión a la base de datos MongoDB.
+
+        await dbConnection()
+    }
     middlewares() {
             this.app.use(cors());
             this.app.use(express.json());

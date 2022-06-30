@@ -6,8 +6,9 @@
 // Docente: Ing. Jhon Antonio Cevallos Macías, Mg.
 // Archivo de barril.
 // Se extrae el middleware de validarDatos.
-const validarCampos = require('./validarCampos')
-    // Se exporta el módulo de validarDatos.
+const validarCampos = require('../middlewares/validarCampos')
+
+// Se exporta el módulo de validarDatos.
 module.exports = {
     ...validarCampos
 }

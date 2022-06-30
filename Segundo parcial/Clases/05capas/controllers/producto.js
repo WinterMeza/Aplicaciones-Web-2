@@ -9,13 +9,12 @@ const { response } = require('express');
 const { Producto } = require('../models');
 // Se declaran las operaciones CRUD para Praducto.
 const obtenerProductos = async(req, res = response) => {
-
         const { limite = 10, desde = 0 } = req.query;
         const query = { estado: true };
         // Se usa promesa .
         const [total, productos] = await Promise.all(
             [
-                Producto.countDocuments(),
+                Producto.countDocuments(query),
                 Producto.find(query)
                 .skip(desde)
                 .limit(limite)
@@ -28,7 +27,6 @@ const obtenerProductos = async(req, res = response) => {
     }
     //Función para obtener productos de forma individual.
 const obtenerProducto = async(req, res = response) => {
-
         const { id } = req.params
         const producto = await Producto.findById(id);
         res.json(producto);
