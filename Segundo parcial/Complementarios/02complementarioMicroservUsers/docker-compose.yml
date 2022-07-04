@@ -1,0 +1,39 @@
+# APLICACIONES WEB 2
+# Nombres y Apellidos: Winter Aníbal Meza Jiménez.
+# Curso: Sexto "B" 2022(1).
+# Complementario: 01Complementario Microservicios.
+# Fecha: Domingo, 3 de julio de 2022.
+# Docente: Ing. Jhon Antonio Cevallos Macías, Mg.
+
+                               #Configuración para el Docker-Compose.
+#version: Debemos indicar que versión de docker-compose vamos a utilizar para la cual trabajaremos con la versión 3.
+version: '3'
+#services:indicaremos los diferentes servicios que vamos a utilizar y cada uno de ellos será convertido en un contenedor.
+services:
+# user:se crea el contenedor del user-service.
+  user:
+    build: ./user-service
+# depends_on:tenemos un contenedor que depende de otro en este caso dependemos de mongo.
+    depends_on:
+      - mongo
+#Podemos enviar variables de entorno a nuestro contenedor, normalmente las imágenes utilizan estas variables para distintos temas de configuración para la cual asignaremos MONGODB_CNN.
+    environment:
+      - MONGODB_CNN=mongodb://mongo:27017/Microsv_user
+      #image: Indicamos qué imagen vamos a utilizar para el cual usamos la de la base de datos NOSQL mongo y el servidor nginx.
+      #mongo:es una base de datos NOSQL, se configura la imagen y se utiliza la última versión colocando latest.
+  mongo:
+    image: mongo
+    command: mongod --quiet --logpath /dev/null
+    #nginx:es un servidor web/proxy, se configura la imagen y se utiliza la última versión colocando latest.
+  nginx:
+    image: nginx:latest
+    #ports: Los puertos que van a enrutar desde el exterior del contenedor al interior para el cual asignamos 8080  y en el mongo 27017 por defecto.
+    ports:
+      - "8080:8080"
+    #volumes:permite mapear elementos del sistema de archivos del interior del contenedor con elementos del sistema de archivos en el exterior para la cual asignamos.
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    #depends_on:  tenemos un contenedor que depende de otro en este caso dependemos de user.
+    depends_on:
+      - user
+      
