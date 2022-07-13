@@ -1,0 +1,28 @@
+<!-- 
+ Nombres y Apellidos: Winter Aníbal Meza Jiménez.
+ Curso: Sexto "B" 2022(1).
+ Clase: Server Side Render CRUD.
+ Fecha: Miércoles 13/7/2022.
+ Docente: Ing. Jhon Antonio Cevallos Macías, Mg.
+-->
+<div class="container">
+    <div class="row">
+        <!-- Tabla para el CRUD-->
+        <table>
+            <thead>
+                        <!-- Campos para el fomulario del CRUD-->
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Costo</th>
+            </thead>
+            {{#each productos}}
+            <tr>
+                <td>{{ this.nombre }}</td>
+                <td>{{ this.precio }}</td>
+                <td>{{ this.costo }}</td>
+            </tr>
+            {{/each}}
+        </table>
+
+    </div>
+</div>
