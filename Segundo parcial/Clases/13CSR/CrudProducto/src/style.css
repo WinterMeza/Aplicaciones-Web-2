@@ -1,8 +1,19 @@
+/*
+ Nombres y Apellidos: Winter Aníbal Meza Jiménez.
+ Curso: Sexto "B" 2022(1).
+ Clase: Client Side Render CRUD.
+ Fecha: 30/6/2022- Modificado: Miércoles 13/7/2022.
+ Docente: Ing. Jhon Antonio Cevallos Macías, Mg.
+*/
+
+
+/* Estilos para el CRUD*/
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 60px;
 }
