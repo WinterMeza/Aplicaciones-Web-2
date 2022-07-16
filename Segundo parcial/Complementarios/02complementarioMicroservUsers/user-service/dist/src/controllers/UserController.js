@@ -1,4 +1,10 @@
 "use strict";
+// APLICACIONES WEB 2
+// Nombres y Apellidos: Winter Aníbal Meza Jiménez.
+// Curso: Sexto "B" 2022(1).
+// Complementario: 01Complementario Docker.
+// Fecha: Domingo, 3 de julio de 2022.
+// Docente: Ing. Jhon Antonio Cevallos Macías, Mg.
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -16,18 +22,21 @@ exports.eliminarUserPorId = exports.actualizaruserPorId = exports.obtenerUserPor
 const bcrypt_nodejs_1 = __importDefault(require("bcrypt-nodejs"));
 const user_1 = require("../models/user");
 const jwt_1 = require("../helpers/jwt");
+// Función para registrar usuarios.
 function registrar(req, res) {
     const params = req.body; //Me manda el body del request
     const user = new user_1.User(); //Se instancia el modelo
     if (params.password) {
         bcrypt_nodejs_1.default.hash(params.password, null, null, function (err, hash) {
             if (hash) {
+                // Atributos del modelo. 
                 user.password = hash;
                 user.nombres = params.nombres;
                 user.apellidos = params.apellidos;
                 user.cedula = params.cedula;
                 user.email = params.email;
                 user.role = params.role;
+                // En caso de error se envia un mensaje de usario no registrado caso contrario guarda el usuario.
                 user.save((err, user_save) => {
                     if (err) {
                         res.status(500).send({ error: 'No se ingresó el usuario' });
@@ -44,9 +53,10 @@ function registrar(req, res) {
     }
 }
 exports.registrar = registrar;
+// Función para logearse una vez que el usuario este registrado.
 const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const data = req.body;
-    //Buscamos el usuario por email
+    //Buscamos el usuario por email.
     yield user_1.User.findOne({ cedula: data.cedula }, (err, user_data) => {
         if (err) {
             res.status(500).send({ message: 'Error en el servidor' });
@@ -81,10 +91,11 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }).clone().catch(function (err) { console.log(err); });
 });
 exports.login = login;
+// Función para buscar usuarios de forma general.
 const obtenerUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const user = yield user_1.User.find();
-        res.status(200).send(user);
+        res.status(200).send({ users: user });
     }
     catch (error) {
         console.log(error);
@@ -92,12 +103,13 @@ const obtenerUser = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     }
 });
 exports.obtenerUser = obtenerUser;
+// Función para buscar usuario de forma individual (ID).
 const obtenerUserPorId = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = req.params['id'];
         yield user_1.User.findById(id, (err, user_data) => {
             if (user_data) {
-                res.status(200).send(user_data);
+                res.status(200).send({ user: user_data });
             }
             else {
                 res.status(400).send({ message: 'No existe el usuario' });
@@ -110,6 +122,7 @@ const obtenerUserPorId = (req, res) => __awaiter(void 0, void 0, void 0, functio
     }
 });
 exports.obtenerUserPorId = obtenerUserPorId;
+// Función para actualizar usuario de forma individual (ID).
 const actualizaruserPorId = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = req.params['id'];
@@ -129,7 +142,7 @@ const actualizaruserPorId = (req, res) => __awaiter(void 0, void 0, void 0, func
     }
 });
 exports.actualizaruserPorId = actualizaruserPorId;
-//ELIMINAR USUARIO
+//// Función para eliminar usuarios de forma individual (ID).
 const eliminarUserPorId = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = req.params['id'];

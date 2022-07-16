@@ -36,10 +36,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Server = void 0;
+// APLICACIONES WEB 2
+// Nombres y Apellidos: Winter Aníbal Meza Jiménez.
+// Curso: Sexto "B" 2022(1).
+// Complementario: 02Complementario Microservicios.
+// Fecha: Domingo, 3 de julio de 2022.
+// Docente: Ing. Jhon Antonio Cevallos Macías, Mg.
+// Exportamos la librería de express y cors..
 const express_1 = __importStar(require("express"));
 const cors_1 = __importDefault(require("cors"));
+// Se importa las rutas y la función para la conexión a la base de datos.
 const user_1 = require("./src/routes/user");
 const db_1 = require("./src/database/db");
+// Se crea la clase Server para levantar el servidor y el puerto de salida.
+// Defino la clase servidor que tiene las funciones de listen como middleware o rutas.
 class Server {
     constructor() {
         this.app = (0, express_1.Router)();
@@ -51,6 +61,7 @@ class Server {
         this.conexionDB();
         this.middleware();
         this.routes();
+        // Ruta Padre.
         this.router.use('/TecnoService', this.app);
         this._express = (0, express_1.default)().use(this.router);
     }
@@ -67,6 +78,8 @@ class Server {
     routes() {
         this.app.use(this.paths.users, user_1.api);
     }
+    // Se aplica modificador de acceso de tipo público para el método de listen ya que permite que 
+    // el usuario conozca en que puerto está corriendo el servidor.
     listen() {
         this._express.listen(this.port, () => {
             console.log(`Servidor corriendo en http://localhost:${this.port}/TecnoService/api/users `);

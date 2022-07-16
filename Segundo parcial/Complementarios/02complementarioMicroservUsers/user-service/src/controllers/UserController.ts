@@ -99,7 +99,7 @@ const obtenerUser = async (req : Request, res : Response) => {
     try {
 
         const user = await User.find();
-        res.status(200).send(user);
+        res.status(200).send({users: user});
 
 
     } catch (error) {
@@ -119,7 +119,7 @@ const  obtenerUserPorId = async (req : Request, res : Response) => {
 
             if (user_data) {
 
-                res.status(200).send(user_data)
+                res.status(200).send({user: user_data})
             } else {
 
                 res.status(400).send({ message: 'No existe el usuario' })
